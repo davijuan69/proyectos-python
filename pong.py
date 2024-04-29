@@ -11,8 +11,10 @@ py.display.set_caption("pong")
 
 clock = py.time.Clock()
 
+
 jugador = py.Rect(ancho-110, alto/2-50, 10, 100)
 jugador2 = py.Rect(110, alto/2-50, 10, 100)
+jugador_record, jugador2_record = 0
 
 pelota = py.Rect(ancho/2-10, alto/2-10, 20, 20)
 x_velocidad, y_velocidad = 1, 1
@@ -36,6 +38,16 @@ while True:
         if event.type == py.QUIT:
             py.quit()
             quit()
+
+    if pelota.y>= alto:
+        y_velocidad = -1
+    if pelota.y <= 0:
+        y_velocidad = 1
+    if pelota.x <= 0:
+        jugador_record += 1
+        pelota.center = (ancho/2, alto/2)
+        x_velocidad, y_velocidad = r.choice((1, -1)), r.choice((1, -1))
+
 
     sreen.fill((0, 0, 0))
 
